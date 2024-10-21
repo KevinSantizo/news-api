@@ -74,7 +74,7 @@ class NewsByCategorySerializer(ModelSerializer):
 
     def get_news(self, category):
         res = New.objects.filter(category=category).order_by('-created')
-        serializer = NewSerializer(instance=res, many=True)
+        serializer = NewSerializer(instance=res, many=True).order_by('-created')
         return serializer.data
 
     class Meta:
