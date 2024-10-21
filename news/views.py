@@ -6,7 +6,7 @@ from rest_framework import viewsets, status
 from django.utils import timezone
 
 from news.serializers import NewSerializer, NewCategorySerializer, MyTokenObtainPairSerializer, RegisterSerializer, \
-    CustomUserSerializer, SourceSerializer, NewsByCategorySerializer
+    CustomUserSerializer, SourceSerializer, NewsByCategorySerializer, RandomNewsByCategorySerializer
 
 from rest_framework import generics, permissions
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -74,3 +74,10 @@ class NewsByCategoryViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = NewCategory.objects.all()
     serializer_class = NewsByCategorySerializer
+
+
+class RandomNewsByCategoryViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = NewCategory.objects.all()
+    serializer_class = RandomNewsByCategorySerializer
+    

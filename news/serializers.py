@@ -73,8 +73,22 @@ class NewsByCategorySerializer(ModelSerializer):
     news = serializers.SerializerMethodField('get_news')
 
     def get_news(self, category):
+        res = New.objects.filter(category=category)
+        serializer = NewSerializer(instance=res, many=True)
+        return serializer.data
+
+    class Meta:
+        model = NewCategory
+        fields = ('id', 'category_name', 'image', 'created', 'news')
+
+
+class RandomNewsByCategorySerializer(ModelSerializer):
+    news = serializers.SerializerMethodField('get_news')
+
+    def get_news(self, category):
         res = New.objects.filter(category=category).order_by('-created')
-        serializer = NewSerializer(instance=res, many=True).order_by('-created')
+        print(res, ' res ')
+        serializer = NewSerializer(instance=res, many=True)
         return serializer.data
 
     class Meta:
