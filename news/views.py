@@ -66,7 +66,7 @@ class RecentNewViewSet(viewsets.ModelViewSet):
     serializer_class = NewSerializer
 
     def get_queryset(self):
-        queryset = New.objects.filter(created__gte=timezone.now() - timezone.timedelta(days=1)).order_by('-created')
+        queryset = New.objects.filter(created__gte=timezone.now() - timezone.timedelta(days=7)).order_by('-created')
         return queryset
 
 
